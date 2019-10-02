@@ -1,5 +1,6 @@
 # rust-playground
-Rust repository for learning purposes
+Rust repository for learning purposes.
+Step-by-step of "The Rust Programming Language" Book, available in https://doc.rust-lang.org/stable/book
 
 # Installation (Linux)
 
