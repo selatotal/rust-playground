@@ -13,4 +13,4 @@ cargo run
 
 ## To Learn More
 - [AWS IoT Core Documentation](https://docs.aws.amazon.com/iot/latest/developerguide/what-is-aws-iot.html)
-- [rumqtt create documentation](https://docs.rs/crate/rumqtt)
+- [rumqtt crate documentation](https://docs.rs/crate/rumqtt)
