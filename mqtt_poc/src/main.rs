@@ -1,10 +1,10 @@
-use rumqtt::{MqttClient, MqttOptions, QoS, ReconnectOptions};
-use std::{thread, time::Duration};
+use rumqtt::{MqttClient, MqttOptions, QoS, ReconnectOptions, Notification};
+use std::{thread, time::Duration, str};
 
 fn main() {
     pretty_env_logger::init();
  
-    let broker = "<YOUR-BROKER-ENDPOINT-HERE";
+    let broker = "YOUR-BROKER-ENDPOINT";
     let port = 8883;
     let client_id = "test-pubsub";
     let topic_subscribe = "hello/world";
@@ -25,6 +25,7 @@ fn main() {
         .set_clean_session(false);
 
     let (mut mqtt_client, notifications) = MqttClient::start(mqtt_options).unwrap();
+
     mqtt_client.subscribe(topic_subscribe, QoS::AtLeastOnce).unwrap();
 
     thread::spawn(move || {
@@ -37,6 +38,11 @@ fn main() {
 
     for notification in notifications {
         println!("RECEIVED: {:?}", notification);
+        match notification {
+            Notification::Publish(p) => println!("PAYLOAD: {:?}", str::from_utf8(&p.payload).unwrap()), 
+            _ => println!("Ignore message:")
+        }
+        
     }
 
     println!("Disconnected!");
