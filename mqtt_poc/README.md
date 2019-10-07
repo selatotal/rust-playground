@@ -5,3 +5,8 @@ Proof-of-concept of Rust connecting to AWS MQTT broker using rumqtt lib
 - Configure certificates in AWS IoT Core (https://docs.aws.amazon.com/iot/latest/developerguide/iot-authentication.html)
 - Add CA/Certificate and Private Key PEM files in certs folder and configure main.rs file to your certificates
 - Configure broker with your AWS IoT Broker endpoint
+
+## Execute
+```bash
+cargo run
+```
