@@ -4,10 +4,10 @@ use std::{thread, time::Duration, str};
 fn main() {
     pretty_env_logger::init();
  
-    let broker = "YOUR-BROKER-ENDPOINT";
+    let broker = "a3jend8qj3q5ix-ats.iot.us-east-1.amazonaws.com";
     let port = 8883;
-    let client_id = "test-pubsub";
-    let topic_subscribe = "hello/world";
+    let client_id = "test-pubsub-tales";
+    let topic_subscribe = "central/commands/+/1/1";
 
     // Include AWS CA Certificate here (https://www.amazontrust.com/repository/AmazonRootCA1.pem)
     let ca = include_bytes!("certs/ca-chain.cert.pem").to_vec();
@@ -28,13 +28,13 @@ fn main() {
 
     mqtt_client.subscribe(topic_subscribe, QoS::AtLeastOnce).unwrap();
 
-    thread::spawn(move || {
-        for i in 0..100 {
-            let payload = format!("message: {}", i);
-            thread::sleep(Duration::from_millis(1000));
-            mqtt_client.publish(topic_subscribe, QoS::AtLeastOnce, false, payload).unwrap();
-        }
-    });
+    // thread::spawn(move || {
+    //     for i in 0..100 {
+    //         let payload = format!("message: {}", i);
+    //         thread::sleep(Duration::from_millis(1000));
+    //         mqtt_client.publish(topic_subscribe, QoS::AtLeastOnce, false, payload).unwrap();
+    //     }
+    // });
 
     for notification in notifications {
         println!("RECEIVED: {:?}", notification);
