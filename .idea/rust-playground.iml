@@ -7,7 +7,28 @@
       <sourceFolder url="file://$MODULE_DIR$/16.command_line/minigrep/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/16.command_line/minigrep/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/16.command_line/minigrep/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/15.tests/adder/adder/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/15.tests/adder/adder/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/15.tests/adder/adder/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/15.tests/adder/adder/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/15.tests/adder/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/15.tests/adder/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/15.tests/adder/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/15.tests/adder/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/17.cargo/add/adder/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/17.cargo/add/adder/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/17.cargo/add/adder/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/17.cargo/add/adder/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/17.cargo/add/add-one/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/17.cargo/add/add-one/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/17.cargo/add/add-one/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/17.cargo/add/add-one/benches" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/15.tests/adder/adder/target" />
+      <excludeFolder url="file://$MODULE_DIR$/15.tests/adder/target" />
       <excludeFolder url="file://$MODULE_DIR$/16.command_line/minigrep/target" />
+      <excludeFolder url="file://$MODULE_DIR$/17.cargo/add/add-one/target" />
+      <excludeFolder url="file://$MODULE_DIR$/17.cargo/add/adder/target" />
+      <excludeFolder url="file://$MODULE_DIR$/17.cargo/add/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
