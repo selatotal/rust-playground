@@ -23,12 +23,42 @@
       <sourceFolder url="file://$MODULE_DIR$/17.cargo/add/add-one/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/17.cargo/add/add-one/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/17.cargo/add/add-one/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_1/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_1/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_1/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_1/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_2/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_2/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_2/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_2/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_channels/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_channels/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_channels/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_channels/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_channels_2/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_channels_2/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_channels_2/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_channels_2/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_channels_3/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_channels_3/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_channels_3/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_channels_3/benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/mutex_1/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/mutex_1/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/mutex_1/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/18.concurrence/mutex_1/benches" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/15.tests/adder/adder/target" />
       <excludeFolder url="file://$MODULE_DIR$/15.tests/adder/target" />
       <excludeFolder url="file://$MODULE_DIR$/16.command_line/minigrep/target" />
       <excludeFolder url="file://$MODULE_DIR$/17.cargo/add/add-one/target" />
       <excludeFolder url="file://$MODULE_DIR$/17.cargo/add/adder/target" />
       <excludeFolder url="file://$MODULE_DIR$/17.cargo/add/target" />
+      <excludeFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_1/target" />
+      <excludeFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_2/target" />
+      <excludeFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_channels/target" />
+      <excludeFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_channels_2/target" />
+      <excludeFolder url="file://$MODULE_DIR$/18.concurrence/concurrence_channels_3/target" />
+      <excludeFolder url="file://$MODULE_DIR$/18.concurrence/mutex_1/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
