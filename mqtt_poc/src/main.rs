@@ -6,8 +6,8 @@ fn main() {
  
     let broker = "a3jend8qj3q5ix-ats.iot.us-east-1.amazonaws.com";
     let port = 8883;
-    let client_id = "test-pubsub-tales";
-    let topic_subscribe = "central/commands/+/1/1";
+    let client_id = "centralcoretest";
+    let topic_subscribe = "central/test/centralcoretest/outgoing";
 
     // Include AWS CA Certificate here (https://www.amazontrust.com/repository/AmazonRootCA1.pem)
     let ca = include_bytes!("certs/ca-chain.cert.pem").to_vec();
@@ -28,18 +28,20 @@ fn main() {
 
     mqtt_client.subscribe(topic_subscribe, QoS::AtLeastOnce).unwrap();
 
-    // thread::spawn(move || {
-    //     for i in 0..100 {
-    //         let payload = format!("message: {}", i);
-    //         thread::sleep(Duration::from_millis(1000));
-    //         mqtt_client.publish(topic_subscribe, QoS::AtLeastOnce, false, payload).unwrap();
-    //     }
-    // });
+    thread::spawn(move || {
+        for i in 0..100 {
+            let payload = format!("message: {}", i);
+            thread::sleep(Duration::from_millis(1000));
+            mqtt_client.publish(topic_subscribe, QoS::AtLeastOnce, false, payload).unwrap();
+        }
+    });
 
     for notification in notifications {
         println!("RECEIVED: {:?}", notification);
         match notification {
             Notification::Publish(p) => println!("PAYLOAD: {:?}", str::from_utf8(&p.payload).unwrap()), 
+            Notification::Disconnection => println!("PAYLOAD DISCONNECTED"), 
+            Notification::PubAck(p) => println!("ACK: {:?}", p), 
             _ => println!("Ignore message:")
         }
         
