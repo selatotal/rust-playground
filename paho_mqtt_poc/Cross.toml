@@ -1,0 +1,8 @@
+[target.mipsel-unknown-linux-musl]
+image = "orsegups/mipsel-unknown-linux-musl"
+passthrough = [
+    "CMAKE_CFLAGS",
+    "OPENSSLCRYPTO_LIB",
+    "OPENSSL_LIB"
+]
+xargo = true

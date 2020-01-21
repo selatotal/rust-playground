@@ -182,3 +182,5 @@ Cargo.lock
 
 # Ignore certificates
 *.pem
+04.variables/shadow/src/main
+paho_mqtt_poc/a.out
