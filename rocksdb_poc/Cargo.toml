@@ -8,3 +8,5 @@ edition = "2018"
 
 [dependencies]
 rocksdb = { version = "0.13", features = ["zstd"] }
+bincode = "1.2.1"
+serde = { version = "1.0", features = ["derive"] }
