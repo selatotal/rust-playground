@@ -1,6 +1,14 @@
-use diesel::Queryable;
+use diesel::{Queryable,Insertable};
+use super::schema::posts;
 
-#[derive(Queryable)]
+#[derive(Insertable)]
+#[table_name="posts"]
+pub struct NewPost<'a> {
+    pub title: &'a str,
+    pub body: &'a str,
+}
+
+#[derive(Queryable, Clone, Debug)]
 pub struct Post {
     pub id: i32,
     pub title: String,
