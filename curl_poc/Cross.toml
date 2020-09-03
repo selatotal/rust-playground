@@ -1,0 +1,4 @@
+[target.mipsel-unknown-linux-musl]
+image = "orsegups/mipsel-unknown-linux-musl"
+xargo = false
+
