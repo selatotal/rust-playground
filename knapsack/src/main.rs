@@ -1,7 +1,7 @@
 use rand::Rng;
 
 const WEIGTHS: &[i32] = &[10, 13, 15, 12, 23, 30, 12];
-const CAPACITY: i32 = 50;
+const CAPACITY: i32 = 33;
 
 fn main() {
 
@@ -12,13 +12,13 @@ fn main() {
     println!("Initial Population = {:?}", population);
 
     loop {
-        population = create_population(population.as_mut());
-        println!("New Population = {:?}", population);
         if stop(population.as_mut()) { 
             println!("Found Solution in {} iteractions : {:?} - {}!", iteractions, population[0], get_size(&population[0]));
             break;
         }
         iteractions+=1;
+        println!("New Population = {:?}", population);
+        population = create_population(population.as_mut());
     }
 
 }
