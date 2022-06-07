@@ -1,15 +1,15 @@
 use std::fs;
 
-use glob::glob;
-
 fn main() {
-    for entry in glob("/home/talesviegas/Temp/*").expect("Failed to read glob pattern") {
-        match entry {
-            Ok(path) => {
-                println!("Removing {:?}", path.display());
-                fs::remove_file(path).unwrap();
-            },
-            Err(e) => println!("{:?}", e),
-        }
+
+    match fs::read_dir("/home/talesviegas/Temasp/") {
+        Ok(files) => files.into_iter()
+            .filter_map(|f| f.ok())
+            .filter(|f| f.file_name().to_string_lossy().contains("db.temp"))
+            .for_each(|path| {
+                    println!("Removing {:?}", path);
+                    fs::remove_file(path.path()).unwrap();
+        }),
+        Err(e) => println!("Error reading files on path: {:?}", e),
     }
 }
