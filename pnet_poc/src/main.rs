@@ -1,7 +1,7 @@
 extern crate pnet;
 
 use pnet::datalink;
-use ipnetwork::IpNetwork;
+use pnet::ipnetwork::IpNetwork;
 
 fn main() {
     for iface in datalink::interfaces() {
