@@ -1,5 +1,5 @@
 use tokio::task;
-use tokio::time::delay_for;
+use tokio::time::sleep;
 use std::time::Duration;
 
 #[tokio::main]
@@ -9,8 +9,7 @@ async fn main() {
         loop {
             println!("First Thread running {}", count);
             count = count + 1;
-            // ERROR: https://github.com/tokio-rs/tokio/issues/1897
-            delay_for(Duration::from_secs(1)).await;
+            sleep(Duration::from_secs(1)).await;
         }
     });
 
@@ -19,8 +18,7 @@ async fn main() {
         loop {
             println!("Second Thread running {}", count);
             count = count + 1;
-            // ERROR: https://github.com/tokio-rs/tokio/issues/1897
-            delay_for(Duration::from_secs(1)).await;
+            sleep(Duration::from_secs(1)).await;
         }
     });
 
