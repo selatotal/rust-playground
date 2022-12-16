@@ -1,6 +1,6 @@
 use pickledb::{PickleDb, PickleDbDumpPolicy, SerializationMethod};
-use shadow::{TakePictureRequest, Message, PictureData};
-mod shadow;
+use structs::{TakePictureRequest, Message, PictureData};
+mod structs;
 
 fn main() {
 
