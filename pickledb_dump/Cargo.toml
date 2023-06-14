@@ -2,7 +2,7 @@
 name = "pickedb_dump"
 version = "0.1.0"
 edition = "2021"
-author = "Tales Viegas"
+authors = ["Tales Viegas"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -13,4 +13,4 @@ serde_json = "1.0"
 serde_repr = "0.1"
 num-derive = "0.3"
 num-traits = "0.2"
-uuid = { version = "1.2.1", default-features = false, features = ["v4"] }
+uuid = { version = "1.2.1", default-features = false, features = ["v4","serde"] }

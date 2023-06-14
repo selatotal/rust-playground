@@ -1,16 +1,25 @@
 use pickledb::{PickleDb, PickleDbDumpPolicy, SerializationMethod};
 use structs::{TakePictureRequest, Message, PictureData};
+use crate::shadow::Shadow;
+
 mod structs;
+mod shadow;
+mod storage;
 
 fn main() {
 
-    let db = PickleDb::load("storage.db", PickleDbDumpPolicy::AutoDump, SerializationMethod::Bin).unwrap();
+    let db = PickleDb::load("/tmp/storage.db", PickleDbDumpPolicy::AutoDump, SerializationMethod::Bin).unwrap();
 
     for kv in db.iter() {
         let key = kv.get_key();
         match key {
             "shadow" => {
-                println!("shadow: {}", kv.get_value::<String>().unwrap());
+                let shadow_string = kv.get_value::<String>().unwrap();
+                let shadow_opts: Result<Shadow, _> = serde_json::from_str(&shadow_string);
+                match shadow_opts{
+                    Ok(shadow) => println!("shadow: {}", serde_json::to_string(&shadow).unwrap()),
+                    Err(error) => println!("Error deserializing shadow: {:?}", error),
+                }
             }, 
             "last_button_clicked" => println!("{}: {}", key, kv.get_value::<u64>().unwrap()),
             "last_event_timestamp" => println!("{}: {}", key, kv.get_value::<u128>().unwrap()),
