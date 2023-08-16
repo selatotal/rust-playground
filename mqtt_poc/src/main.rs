@@ -4,9 +4,9 @@ use std::{thread, time::Duration, str};
 fn main() {
     pretty_env_logger::init();
  
-    let broker = "a3jend8qj3q5ix-ats.iot.us-east-1.amazonaws.com";
+    let broker = "a993sqym4h3gr-ats.iot.us-east-1.amazonaws.com";
     let port = 8883;
-    let client_id = "centralcoretest";
+    let client_id = "a453ee2016bb";
     let topic_subscribe = "central/test/centralcoretest/outgoing";
 
     // Include AWS CA Certificate here (https://www.amazontrust.com/repository/AmazonRootCA1.pem)
