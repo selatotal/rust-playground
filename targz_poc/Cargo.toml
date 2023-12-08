@@ -6,5 +6,5 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-flate2 = "1.0.26"
-tar = "0.4.38"
+flate2 = {version = "1.0.28", features = ["zlib"] }
+tar = "0.4.40"

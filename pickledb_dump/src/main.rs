@@ -1,4 +1,5 @@
 use pickledb::{PickleDb, PickleDbDumpPolicy, SerializationMethod};
+use serde_json::json;
 use structs::{TakePictureRequest, Message, PictureData};
 use crate::shadow::Shadow;
 
@@ -13,16 +14,18 @@ fn main() {
     for kv in db.iter() {
         let key = kv.get_key();
         match key {
+            "shadow_bin" => {
+                // let shadow_string = kv.get_value::<Shadow>().unwrap();
+                // let shadow_opts = serde_json::to_string(&shadow_string);
+                // println!("shadow: {}", shadow_opts.unwrap());
+            }, 
             "shadow" => {
                 let shadow_string = kv.get_value::<String>().unwrap();
-                let shadow_opts: Result<Shadow, _> = serde_json::from_str(&shadow_string);
-                match shadow_opts{
-                    Ok(shadow) => println!("shadow: {}", serde_json::to_string(&shadow).unwrap()),
-                    Err(error) => println!("Error deserializing shadow: {:?}", error),
-                }
+                let shadow_opts:Shadow = serde_json::from_str(&shadow_string).unwrap();
+                println!("shadow: {}", json!(shadow_opts));
             }, 
             "last_button_clicked" => println!("{}: {}", key, kv.get_value::<u64>().unwrap()),
-            "last_event_timestamp" => println!("{}: {}", key, kv.get_value::<u128>().unwrap()),
+            "last_event_timestamp" => println!("{}: {}", key, kv.get_value::<u64>().unwrap()),
             "button_count" => println!("{}: {}", key, kv.get_value::<u16>().unwrap()),
             "active_call" => println!("{}: {}", key, kv.get_value::<bool>().unwrap()),
             "sequence_code" => println!("{}: {}", key, kv.get_value::<usize>().unwrap()),

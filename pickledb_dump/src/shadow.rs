@@ -2,7 +2,7 @@ use std::sync::{Arc, Mutex};
 use std::time::{SystemTime, UNIX_EPOCH};
 
 use num_derive::FromPrimitive;
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize,Serializer};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 use uuid::Uuid;
 
@@ -29,23 +29,23 @@ pub struct Shadow {
     pub offline_setup_password: String,
     #[serde(rename = "9", default)]
     pub power_status: u8,
-    #[serde(rename = "A", default)]
+    #[serde(rename = "A", default, serialize_with = "round_serialize")]
     pub power_voltage: f32,
-    #[serde(rename = "B", default)]
+    #[serde(rename = "B", default, serialize_with = "round_serialize")]
     pub battery_voltage: f32,
-    #[serde(rename = "C", default)]
+    #[serde(rename = "C", default, serialize_with = "round_serialize")]
     pub battery_level: f32,
-    #[serde(rename = "D", default)]
+    #[serde(rename = "D", default, serialize_with = "round_serialize")]
     pub battery_low_level: f32,
-    #[serde(rename = "E", default)]
+    #[serde(rename = "E", default, serialize_with = "round_serialize")]
     pub battery_low_level_reed_switch: f32,
-    #[serde(rename = "F", default)]
+    #[serde(rename = "F", default, serialize_with = "round_serialize")]
     pub battery_low_level_pir_sensor: f32,
-    #[serde(rename = "10", default)]
+    #[serde(rename = "10", default, serialize_with = "round_serialize")]
     pub battery_low_level_pir_photo_sensor: f32,
-    #[serde(rename = "11", default)]
+    #[serde(rename = "11", default, serialize_with = "round_serialize")]
     pub battery_low_level_wireless_siren: f32,
-    #[serde(rename = "12", default)]
+    #[serde(rename = "12", default, serialize_with = "round_serialize")]
     pub battery_low_level_remote_control: f32,
     #[serde(rename = "13", default)]
     pub connection_priority: u16,
@@ -160,7 +160,7 @@ pub struct Shadow {
     #[serde(rename = "4C", default)]
     pub central_mode: CentralMode,
     #[serde(rename = "4D", default)]
-    pub central_id: Uuid,
+    pub central_id: String,
     #[serde(rename = "4E", default)]
     pub tamper: TamperStatusShadow,
     #[serde(rename = "55", default = "volume_level_default")]
@@ -177,6 +177,10 @@ pub struct Shadow {
     pub wwan_mtu: u16,
     #[serde(rename = "60", default)]
     pub demo: bool,
+    #[serde(rename = "61", default = "true_default")]
+    pub disarm_after_triggered: bool,
+    #[serde(rename = "62", default)]
+    pub wwan_ip: String,
     #[serde(rename = "dev", default)]
     pub dev: Vec<DeviceShadow>,
     #[serde(rename = "par", default)]
@@ -190,7 +194,7 @@ pub struct Shadow {
     #[serde(skip)]
     pub opened_armed_devices: Vec<String>,
     #[serde(skip)]
-    pub device_join_reporting: u64,
+    pub device_join_reporting: u32,
     #[serde(skip, default)]
     pub updates_disabled: bool,
 }
@@ -204,9 +208,9 @@ pub struct DeviceShadow {
     pub device_type: DeviceType,
     #[serde(rename = "A2", default)]
     pub version_code: u32,
-    #[serde(rename = "A3", default)]
+    #[serde(rename = "A3", default, serialize_with = "round_serialize")]
     pub battery_level: f32,
-    #[serde(rename = "A4", default)]
+    #[serde(rename = "A4", default, serialize_with = "round_serialize")]
     pub communication_level: f32,
     #[serde(rename = "A5", default)]
     pub communication_status: bool,
@@ -221,7 +225,7 @@ pub struct DeviceShadow {
     #[serde(rename = "AA", default)]
     pub status: bool,
     #[serde(rename = "AB", default)]
-    pub device_id: Uuid,
+    pub device_id: String,
     #[serde(rename = "AC", default)]
     pub accel_axis: u32,
     #[serde(rename = "AD", default)]
@@ -276,10 +280,16 @@ pub struct DeviceShadow {
     pub rssi: i32,
     #[serde(rename = "F6", default)]
     pub last_communication: u128,
-    #[serde(rename = "F7", default)]
+    #[serde(rename = "F7", default, serialize_with = "round_serialize")]
     pub device_battery_voltage: f32,
-    #[serde(rename = "F8", default)]
+    #[serde(rename = "F8", default, serialize_with = "round_serialize")]
     pub device_temperature: f32,
+    #[serde(rename = "F9", default)]
+    pub hidden_zone_from: u64,
+    #[serde(rename = "FA", default)]
+    pub hidden_zone_to: u64,
+    #[serde(rename = "FB", default)]
+    pub crystal_capacitance: u8,
     #[serde(skip, default)]
     pub trigger_count: u16,
     #[serde(skip, default)]
@@ -314,16 +324,19 @@ pub struct PartitionShadow {
     #[serde(rename = "CA", default)]
     pub forced_arm_expiration: u128,
     #[serde(rename = "CB", default)]
-    pub partition_id: Uuid,
+    pub partition_id: String,
     #[serde(rename = "CC", default)]
     pub number_triggers_disable_device: u16,
     #[serde(rename = "CD", default)]
     pub partial: bool,
+    #[serde(rename = "CE", default)]
+    pub last_arm_datetime: Option<u128>,
     #[serde(default)]
     pub partial_arm_devices: Vec<String>,
     #[serde(rename = "dev", default)]
     pub dev: Vec<String>,
 }
+
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -493,7 +506,7 @@ impl Default for Shadow {
             default_partition: String::from("1"),
             log_write: true,
             central_mode: CentralMode::DefaultMode,
-            central_id: Uuid::default(),
+            central_id: Uuid::default().to_string(),
             tamper: TamperStatusShadow::Closed,
             volume_level: 100,
             safe_call: true,
@@ -510,6 +523,8 @@ impl Default for Shadow {
             opened_armed_devices: vec![],
             device_join_reporting: 0,
             updates_disabled: false,
+            disarm_after_triggered: true,
+            wwan_ip: String::default(),
         }
     }
 }
@@ -528,9 +543,10 @@ impl Default for PartitionShadow {
             disarm_wait_time: 60,
             triggered: 1,
             forced_arm_expiration: 0,
-            partition_id: Uuid::new_v4(),
+            partition_id: Uuid::new_v4().to_string(),
             number_triggers_disable_device: 10,
             partial: false,
+            last_arm_datetime: Some(0),
             partial_arm_devices: Vec::new(),
             dev: Vec::new(),
         }
@@ -600,4 +616,11 @@ fn volume_level_default() -> u64 {
 
 fn true_default() -> bool {
     true
+}
+
+fn round_serialize<S>(x: &f32, s: S) -> Result<S::Ok, S::Error>
+where
+    S: Serializer,
+{
+    s.serialize_f32((x * 1000.).round() / 1000.)
 }
